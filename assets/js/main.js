@@ -20,8 +20,8 @@ function renderToolCards(list) {
   }
   grid.innerHTML = list
     .map(
-      (t) => `
-      <div class="tool-card">
+      (t, i) => `
+      <div class="tool-card" style="animation-delay:${i * 70}ms">
         <div class="card-head">
           <div class="tool-icon">${esc(t.icon || "🧩")}</div>
           <div>
@@ -45,6 +45,10 @@ function initHomePage() {
 
   let activeCategory = "全部";
   let keyword = "";
+
+  // 横幅上的工具数量统计
+  const countEl = document.getElementById("tool-count");
+  if (countEl) countEl.textContent = TOOLS.length;
 
   function applyFilter() {
     const list = TOOLS.filter((t) => {
