@@ -1,7 +1,9 @@
 // ============================================================
-// 小婷智能辅助 - 页面渲染逻辑
+// 小婷智能辅助 - 页面渲染 + 动效
 // 数据来自 data/tools.js 中的 TOOLS 数组
 // ============================================================
+
+const REDUCED_MOTION = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
 /** 转义 HTML，防止数据中的特殊字符破坏页面 */
 function esc(str) {
@@ -46,10 +48,6 @@ function initHomePage() {
   let activeCategory = "全部";
   let keyword = "";
 
-  // 横幅上的工具数量统计
-  const countEl = document.getElementById("tool-count");
-  if (countEl) countEl.textContent = TOOLS.length;
-
   function applyFilter() {
     const list = TOOLS.filter((t) => {
       const okCat = activeCategory === "全部" || t.category === activeCategory;
@@ -90,7 +88,14 @@ function initHomePage() {
     });
   }
 
+  // 工具数量写入统计位
+  const countEl = document.getElementById("tool-count");
+  if (countEl) countEl.dataset.count = TOOLS.length;
+
   applyFilter();
+  initStatCounters();
+  initCardSpotlight(grid);
+  initHeroParallax();
 }
 
 /* ---------------- 详情页 ---------------- */
@@ -173,9 +178,123 @@ function initDetailPage() {
   `;
 }
 
+/* ---------------- 动效：数字滚动 ---------------- */
+
+function initStatCounters() {
+  const els = document.querySelectorAll(".stat-number .num");
+  // 减弱动效偏好，或页面在后台（rAF 会被浏览器暂停）时，直接显示最终值
+  if (REDUCED_MOTION || document.hidden) {
+    els.forEach((el) => {
+      el.textContent = el.dataset.count || el.textContent;
+    });
+    return;
+  }
+  els.forEach((el) => {
+    const target = parseInt(el.dataset.count || "0", 10);
+    const dur = 1400;
+    const t0 = performance.now();
+    const ease = (t) => 1 - Math.pow(1 - t, 3); // easeOutCubic
+    function tick(now) {
+      const p = Math.min(1, (now - t0) / dur);
+      el.textContent = Math.round(ease(p) * target);
+      if (p < 1) requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+  });
+}
+
+/* ---------------- 动效：卡片聚光灯跟随 ---------------- */
+
+function initCardSpotlight(grid) {
+  if (REDUCED_MOTION || !window.matchMedia("(hover: hover)").matches) return;
+  grid.addEventListener("mousemove", (e) => {
+    const card = e.target.closest(".tool-card");
+    if (!card) return;
+    const r = card.getBoundingClientRect();
+    card.style.setProperty("--mx", ((e.clientX - r.left) / r.width) * 100 + "%");
+    card.style.setProperty("--my", ((e.clientY - r.top) / r.height) * 100 + "%");
+  });
+}
+
+/* ---------------- 动效：横幅背景巨字视差 ---------------- */
+
+function initHeroParallax() {
+  if (REDUCED_MOTION) return;
+  const hero = document.querySelector(".hero");
+  if (!hero) return;
+  let ticking = false;
+  window.addEventListener(
+    "scroll",
+    () => {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(() => {
+        hero.style.setProperty("--hero-shift", window.scrollY * 0.22 + "px");
+        ticking = false;
+      });
+    },
+    { passive: true }
+  );
+}
+
+/* ---------------- 动效：滚动显现 ---------------- */
+
+function initScrollReveal() {
+  const targets = document.querySelectorAll(".faq-item, .detail-card, .section-head");
+  if (!targets.length) return;
+  // 后台标签页中 IntersectionObserver 可能不触发，保持内容直接可见
+  if (REDUCED_MOTION || document.hidden || !("IntersectionObserver" in window)) return;
+
+  const io = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((en) => {
+        if (en.isIntersecting) {
+          en.target.classList.add("visible");
+          io.unobserve(en.target);
+        }
+      });
+    },
+    { threshold: 0.12 }
+  );
+
+  targets.forEach((el, i) => {
+    el.classList.add("reveal");
+    el.style.transitionDelay = Math.min(i * 60, 240) + "ms";
+    io.observe(el);
+  });
+}
+
+/* ---------------- 动效：顶部阅读进度条 ---------------- */
+
+function initScrollProgress() {
+  if (REDUCED_MOTION) return;
+  const bar = document.createElement("div");
+  bar.id = "scroll-progress";
+  document.body.appendChild(bar);
+  let ticking = false;
+  function update() {
+    const max = document.documentElement.scrollHeight - innerHeight;
+    bar.style.width = (max > 0 ? (scrollY / max) * 100 : 0) + "%";
+    ticking = false;
+  }
+  window.addEventListener(
+    "scroll",
+    () => {
+      if (!ticking) {
+        ticking = true;
+        requestAnimationFrame(update);
+      }
+    },
+    { passive: true }
+  );
+  update();
+}
+
 /* ---------------- 启动 ---------------- */
 
 document.addEventListener("DOMContentLoaded", () => {
   initHomePage();
   initDetailPage();
+  initScrollReveal();
+  initScrollProgress();
 });

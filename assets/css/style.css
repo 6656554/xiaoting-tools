@@ -115,16 +115,43 @@ code {
   font-weight: 700;
 }
 
-/* 当前页下划线 */
-.main-nav a.active::after {
+/* 下划线：悬停从左滑出，当前页常驻 */
+.main-nav a::after {
   content: "";
   position: absolute;
   left: 0;
-  right: 0;
+  right: 100%;
   bottom: -2px;
   height: 2px;
   background: var(--blue);
   border-radius: 2px;
+  transition: right 0.25s ease;
+}
+
+.main-nav a:hover::after,
+.main-nav a.active::after {
+  right: 0;
+}
+
+/* Logo 悬停时图标轻转 */
+.logo .logo-mark {
+  transition: transform 0.3s ease;
+}
+
+.logo:hover .logo-mark {
+  transform: rotate(-12deg) scale(1.15);
+}
+
+/* ---------- 顶部阅读进度条 ---------- */
+#scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 2px;
+  width: 0;
+  background: var(--blue);
+  z-index: 200;
+  pointer-events: none;
 }
 
 /* ---------- 首页横幅 ---------- */
@@ -136,13 +163,14 @@ code {
   border-bottom: 1px solid var(--line-light);
 }
 
-/* 背景巨型装饰字（参考大厂官网的超大浅灰元素） */
+/* 背景巨型装饰字（参考大厂官网的超大浅灰元素），随滚动视差移动 */
 .hero::before {
   content: "TOOLS";
   position: absolute;
   left: 50%;
   top: 44%;
-  transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%) translateY(var(--hero-shift, 0px));
+  will-change: transform;
   font-size: clamp(160px, 28vw, 380px);
   font-weight: 900;
   letter-spacing: 0.02em;
@@ -353,13 +381,42 @@ code {
   padding: 28px;
   display: flex;
   flex-direction: column;
+  position: relative;
+  overflow: hidden;
   transition: transform 0.22s ease, box-shadow 0.22s ease;
   animation: fadeUp 0.55s ease both;
+}
+
+/* 聚光灯：跟随鼠标的淡蓝光晕（--mx/--my 由 JS 更新） */
+.tool-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.25s ease;
+  background: radial-gradient(
+    300px circle at var(--mx, 50%) var(--my, 50%),
+    rgba(0, 115, 255, 0.09),
+    transparent 65%
+  );
 }
 
 .tool-card:hover {
   transform: translateY(-4px);
   box-shadow: 0 20px 48px rgba(0, 0, 0, 0.1);
+}
+
+.tool-card:hover::after {
+  opacity: 1;
+}
+
+.tool-card .tool-icon {
+  transition: transform 0.3s ease;
+}
+
+.tool-card:hover .tool-icon {
+  transform: scale(1.1) rotate(-6deg);
 }
 
 .tool-card .card-head {
@@ -485,7 +542,6 @@ code {
   border-radius: var(--radius);
   padding: 40px;
   margin-bottom: 20px;
-  animation: fadeUp 0.55s ease both;
 }
 
 .detail-head {
@@ -650,7 +706,6 @@ code {
   padding: 28px 32px;
   margin-bottom: 16px;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
-  animation: fadeUp 0.55s ease both;
 }
 
 .faq-item:hover {
@@ -694,6 +749,23 @@ code {
 
 .site-footer a {
   color: var(--text-mid);
+}
+
+/* ---------- 滚动显现 ---------- */
+.reveal {
+  opacity: 0;
+  transform: translateY(26px);
+  transition: opacity 0.65s ease, transform 0.65s ease;
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* .reveal 会覆盖悬停上浮，这里恢复 */
+.faq-item.reveal.visible:hover {
+  transform: translateY(-2px);
 }
 
 /* ---------- 动效偏好 ---------- */
