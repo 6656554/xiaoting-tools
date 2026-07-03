@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>使用帮助 - 小婷智能辅助</title>
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="container">
+      <a class="logo" href="index.html"><span class="logo-mark">✨</span>小婷智能辅助</a>
+      <nav class="main-nav">
+        <a href="index.html">工具下载</a>
+        <a href="guide.html" class="active">使用帮助</a>
+        <a href="about.html">关于</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="page-title">
+    <h1>使用帮助</h1>
+    <p>下载、安装过程中的常见问题</p>
+  </div>
+
+  <main class="container content-section">
+
+    <div class="faq-item">
+      <h3>❓ 浏览器提示"文件可能有害"，被拦截了怎么办？</h3>
+      <p>个人开发者的程序没有大厂的数字签名，浏览器（尤其是 Edge 和 Chrome）会对不常见的 exe 文件默认拦截，这是正常现象，不代表文件有毒。处理方法：</p>
+      <ol>
+        <li>在浏览器的下载列表中找到被拦截的文件</li>
+        <li>点击「…」或右键，选择「保留」/「仍然保留」</li>
+      </ol>
+    </div>
+
+    <div class="faq-item">
+      <h3>❓ Windows Defender / 杀毒软件报毒怎么办？</h3>
+      <p>本站工具均为本人开发，不含任何恶意代码。部分工具使用 Python 等打包而成，或包含模拟键盘鼠标等自动化功能，容易被杀毒软件<strong>误报</strong>。你可以：</p>
+      <ol>
+        <li>核对详情页提供的 SHA256 校验值，确认文件未被篡改（见下一条）</li>
+        <li>将文件或所在文件夹添加到杀毒软件的白名单/排除项</li>
+        <li>不放心的话，可以把文件上传到 <a href="https://www.virustotal.com" target="_blank" rel="noopener">VirusTotal</a> 用几十个引擎交叉检测</li>
+      </ol>
+    </div>
+
+    <div class="faq-item">
+      <h3>❓ 怎么核对文件的 SHA256 校验值？</h3>
+      <p>在文件所在文件夹，按住 Shift 点右键 → 「在此处打开 PowerShell 窗口」，运行：</p>
+      <p><code>Get-FileHash 文件名.exe</code></p>
+      <p>把输出的一长串字符和详情页上公布的校验值对比，完全一致就说明文件完整、没有被篡改。</p>
+    </div>
+
+    <div class="faq-item">
+      <h3>❓ 双击打开提示"Windows 已保护你的电脑"（SmartScreen 蓝色弹窗）？</h3>
+      <p>点击弹窗中的「更多信息」，再点击「仍要运行」即可。这同样是因为程序没有商业数字签名，属于正常提示。</p>
+    </div>
+
+    <div class="faq-item">
+      <h3>❓ 工具支持什么系统？</h3>
+      <p>默认支持 Windows 10 / 11（64 位）。个别工具有特殊要求的，会在详情页的「运行环境」中注明。</p>
+    </div>
+
+    <div class="faq-item">
+      <h3>❓ 发现 Bug 或者有功能建议？</h3>
+      <p>欢迎通过 <a href="about.html">关于页面</a> 的联系方式反馈，看到都会处理。</p>
+    </div>
+
+  </main>
+
+  <footer class="site-footer">
+    <div>小婷智能辅助 · 所有工具均为本人开发，免费提供使用</div>
+    <div>建议从本站或指定链接下载，避免第三方渠道被捆绑篡改</div>
+  </footer>
+
+</body>
+</html>
