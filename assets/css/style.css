@@ -89,10 +89,6 @@ code {
   color: var(--text);
 }
 
-.logo .logo-mark {
-  font-size: 1.2rem;
-}
-
 .main-nav {
   display: flex;
   gap: 28px;
@@ -131,15 +127,6 @@ code {
 .main-nav a:hover::after,
 .main-nav a.active::after {
   right: 0;
-}
-
-/* Logo 悬停时图标轻转 */
-.logo .logo-mark {
-  transition: transform 0.3s ease;
-}
-
-.logo:hover .logo-mark {
-  transform: rotate(-12deg) scale(1.15);
 }
 
 /* ---------- 顶部阅读进度条 ---------- */
