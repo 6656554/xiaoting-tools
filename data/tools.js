@@ -45,8 +45,9 @@ const TOOLS = [
     ],
     requirements: "Windows 10 / 11（64 位）+ CorelDRAW X4 ~ 2025",
     fileSize: "776 MB",
-    sha256: "465053D8E70EDCED556B01D7E2CB12C68FA0621C420CD09F1A1323FEF75F90CD",
-    downloadUrl: "https://kcnmm8k5bca2.feishu.cn/file/G24Vb7ARrowboOxnXtgc7U69nQh",
+    sha256: "5953CE85F6195A5100B080D647037D66CFC74B62E12DE009C407D5B15ED4F110",
+    // 固定下载入口：由积分服务器 302 跳转到最新版飞书链接，发新版无需改网站
+    downloadUrl: "http://43.129.185.208:8000/download",
     video: "assets/media/xiaoting-8k-promo.mp4",
     changelog: [
       {
@@ -56,6 +57,7 @@ const TOOLS = [
           "首个公开发布版本，包含 8K修复放大、一键抠图、AI 生图三大功能",
           "放大档位升级为三档：4K / 8K / 8K直出·至尊（全程云端直出 7680px）",
           "新增批量处理：多个对象一次搞定",
+          "新增复制粘贴支持，云端处理提速一倍",
           "安装包瘦身与多处稳定性修复",
         ],
       },
