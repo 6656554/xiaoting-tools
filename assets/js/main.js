@@ -142,6 +142,13 @@ function initDetailPage() {
        <div class="sha-box">${esc(t.sha256)}</div>`
     : "";
 
+  const videoHtml = t.video
+    ? `<div class="detail-card">
+         <h2>宣传视频</h2>
+         <video class="promo-video" src="${esc(t.video)}" controls preload="metadata"></video>
+       </div>`
+    : "";
+
   wrap.innerHTML = `
     <div class="breadcrumb"><a href="index.html">首页</a> / ${esc(t.name)}</div>
 
@@ -166,6 +173,8 @@ function initDetailPage() {
         </div>
       </div>
     </div>
+
+    ${videoHtml}
 
     <div class="detail-card">
       <h2>工具介绍</h2>

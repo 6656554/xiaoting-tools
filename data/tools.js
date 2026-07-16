@@ -18,31 +18,47 @@
 //   sha256      安装包的 SHA256 校验值（PowerShell 里运行
 //               Get-FileHash 文件名 即可得到；没有可先留空 ""）
 //   downloadUrl 下载直链（推荐用 GitHub Releases 的链接）
+//   video       宣传视频路径（可选，填了会在详情页显示播放器）
 //   changelog   更新日志，新版本写在最前面
 //
 const TOOLS = [
   {
-    id: "demo-tool",
-    name: "示例工具（占位）",
-    version: "1.0.0",
-    updated: "2026-07-03",
-    category: "效率工具",
-    icon: "🛠️",
-    summary: "这是一条示例数据，用来展示网站效果。发布第一个真实工具时，把这条替换掉即可。",
+    id: "xiaoting-8k",
+    name: "小婷8K工作流",
+    version: "1.1.0",
+    updated: "2026-07-16",
+    category: "CDR 插件",
+    icon: "🎨",
+    summary:
+      "CorelDRAW 里的 AI 工具箱：8K修复放大、一键抠图、AI 生图。选中对象点一下按钮，处理完自动原位替换，专为平面设计 / 广告快印行业打造。",
     description:
-      "这里写工具的详细介绍，可以写清楚这个工具解决什么问题、适合谁用。\n" +
-      "支持写多个段落，每一段之间用换行分隔。",
+      "小婷8K工作流是面向平面设计、广告快印行业的 CorelDRAW 插件。安装后工具栏会多出四个按钮，选中对象 → 点按钮 → 进度条走完 → 结果自动原位替换，不打断排版流程。\n" +
+      "客户发来的糊图、低清 LOGO，一键修复放大到 4K / 8K 直接可印；一键抠图采用精细模型，发丝级边缘也能干净分离，且在本地运行不依赖网络；AI 生图输入一句描述即可生成素材，选一张直接置入页面。\n" +
+      "支持 CorelDRAW X4 ~ 2025，一键安装器自动完成部署。部分云端高级功能（8K直出·至尊档等）采用账号积分制，详情见软件内说明。",
     features: [
-      "功能亮点一：这里写工具的核心能力",
-      "功能亮点二：绿色免安装，解压即用",
-      "功能亮点三：不联网、不收集任何数据",
+      "8K修复放大：糊图一键修复，三档可选（4K / 8K / 8K直出·至尊）",
+      "一键抠图：发丝级精细边缘，本地运行不依赖网络",
+      "AI 生图：输入描述生成素材，直接置入 CDR 页面",
+      "批量处理：多个对象一次提交，自动排队完成",
+      "原位替换：处理结果自动放回原来的位置和大小",
+      "支持 CorelDRAW X4 ~ 2025，一键安装器自动部署",
     ],
-    requirements: "Windows 10 / 11（64 位）",
-    fileSize: "12.5 MB",
-    sha256: "",
-    downloadUrl: "#",
+    requirements: "Windows 10 / 11（64 位）+ CorelDRAW X4 ~ 2025",
+    fileSize: "776 MB",
+    sha256: "465053D8E70EDCED556B01D7E2CB12C68FA0621C420CD09F1A1323FEF75F90CD",
+    downloadUrl: "https://kcnmm8k5bca2.feishu.cn/file/G24Vb7ARrowboOxnXtgc7U69nQh",
+    video: "assets/media/xiaoting-8k-promo.mp4",
     changelog: [
-      { version: "1.0.0", date: "2026-07-03", notes: ["首个版本发布"] },
+      {
+        version: "1.1.0",
+        date: "2026-07-16",
+        notes: [
+          "首个公开发布版本，包含 8K修复放大、一键抠图、AI 生图三大功能",
+          "放大档位升级为三档：4K / 8K / 8K直出·至尊（全程云端直出 7680px）",
+          "新增批量处理：多个对象一次搞定",
+          "安装包瘦身与多处稳定性修复",
+        ],
+      },
     ],
   },
 ];
