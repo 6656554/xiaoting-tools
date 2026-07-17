@@ -25,7 +25,7 @@ const TOOLS = [
   {
     id: "xiaoting-8k",
     name: "小婷8K工作流",
-    version: "1.1.1",
+    version: "1.1.2",
     updated: "2026-07-17",
     category: "CDR 插件",
     icon: "🎨",
@@ -46,11 +46,18 @@ const TOOLS = [
     ],
     requirements: "Windows 10 / 11（64 位），8G+ 内存；CorelDRAW X4 ~ 2026（可不装独立使用）",
     fileSize: "776 MB",
-    sha256: "3B101218A9D0CA433E3AEE0FF67E31CBC7734A8C7AA611F97EE4DCD6E2F10C61",
+    sha256: "694CAD74EBF2EDC753E7C88B9C03007464BADEAA93BD9713E3134A07044B5BA3",
     // 固定下载入口：由积分服务器 302 跳转到最新版飞书链接，发新版无需改网站
     downloadUrl: "http://43.129.185.208:8000/download",
     video: "assets/media/xiaoting-8k-promo.mp4",
     changelog: [
+      {
+        version: "1.1.2",
+        date: "2026-07-17",
+        notes: [
+          "【重要】彻底修复兑换激活码提示「登录已过期」的问题（历史版本均受影响，请务必更新到本版后再充值）",
+        ],
+      },
       {
         version: "1.1.1",
         date: "2026-07-17",
