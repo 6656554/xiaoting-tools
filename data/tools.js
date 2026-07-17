@@ -46,7 +46,7 @@ const TOOLS = [
     ],
     requirements: "Windows 10 / 11（64 位），8G+ 内存；CorelDRAW X4 ~ 2026（可不装独立使用）",
     fileSize: "776 MB",
-    sha256: "6160DDDCAC4105AE6FACE84B38530E8270FFB91235730C8E8EB5754718F53B03",
+    sha256: "3B101218A9D0CA433E3AEE0FF67E31CBC7734A8C7AA611F97EE4DCD6E2F10C61",
     // 固定下载入口：由积分服务器 302 跳转到最新版飞书链接，发新版无需改网站
     downloadUrl: "http://43.129.185.208:8000/download",
     video: "assets/media/xiaoting-8k-promo.mp4",
