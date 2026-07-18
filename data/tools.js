@@ -25,8 +25,8 @@ const TOOLS = [
   {
     id: "xiaoting-8k",
     name: "小婷8K工作流",
-    version: "1.1.2",
-    updated: "2026-07-17",
+    version: "1.1.3",
+    updated: "2026-07-18",
     category: "CDR 插件",
     icon: "🎨",
     summary:
@@ -46,11 +46,23 @@ const TOOLS = [
     ],
     requirements: "Windows 10 / 11（64 位），8G+ 内存；CorelDRAW X4 ~ 2026（可不装独立使用）",
     fileSize: "776 MB",
-    sha256: "694CAD74EBF2EDC753E7C88B9C03007464BADEAA93BD9713E3134A07044B5BA3",
+    sha256: "00B5071CECCF211595BF34BC38BC6D615BD6912AA436CFB692A8B34FA842F08E",
     // 固定下载入口：由积分服务器 302 跳转到最新版飞书链接，发新版无需改网站
     downloadUrl: "http://43.129.185.208:8000/download",
     video: "assets/media/xiaoting-8k-promo.mp4",
     changelog: [
+      {
+        version: "1.1.3",
+        date: "2026-07-18",
+        notes: [
+          "云端功能全面升级：处理中可随时点「取消」中止，积分自动退还",
+          "实时显示云端排队 / 生成进度，不再干等转圈",
+          "跨境网络中断自动恢复：结果已生成但下载失败时，原样重试直接取回，不重复扣费",
+          "修复「一句话改图」长方形图片被改成正方形的问题（现严格保持原图比例）",
+          "修复手机照片（带 EXIF 旋转）处理后方向不正的问题",
+          "启动速度优化：窗口秒开，环境检测移到后台",
+        ],
+      },
       {
         version: "1.1.2",
         date: "2026-07-17",
