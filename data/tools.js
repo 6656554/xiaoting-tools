@@ -50,7 +50,7 @@ const TOOLS = [
     fileSize: "882 MB",
     sha256: "3F15720C1F318CA5E95E6819501EA2038B2B0108DAA6B2A3F3D687F610BBD152",
     // 固定下载入口：由积分服务器 302 跳转到最新版飞书链接，发新版无需改网站
-    downloadUrl: "http://43.129.185.208:8000/download",
+    downloadUrl: "https://43.129.185.208/download",
     video: "assets/media/xiaoting-8k-promo.mp4",
     changelog: [
       {
