@@ -12,6 +12,20 @@ function esc(str) {
   return div.innerHTML;
 }
 
+/** 临时公告条（数据里的 notice 字段，见 data/tools.js）。
+ *  卡片上只放标题保持紧凑，详情页展开全部条目。 */
+function noticeHtml(notice, { detailHref = "" } = {}) {
+  if (!notice || !notice.title) return "";
+  if (detailHref) {
+    return `<div class="notice-bar notice-sm">⚠️ ${esc(notice.title)}，<a href="${esc(detailHref)}">查看解决办法</a></div>`;
+  }
+  const items = (notice.items || []).map((s) => `<li>${esc(s)}</li>`).join("");
+  return `<div class="notice-bar">
+      <div class="notice-title">⚠️ ${esc(notice.title)}</div>
+      ${items ? `<ul>${items}</ul>` : ""}
+    </div>`;
+}
+
 /* ---------------- 首页：工具列表 ---------------- */
 
 function renderToolCards(list) {
@@ -32,7 +46,7 @@ function renderToolCards(list) {
           </div>
         </div>
         <div class="tool-summary">${esc(t.summary)}</div>
-        ${t.notice ? `<div class="notice-bar notice-sm">⚠️ ${esc(t.notice)}</div>` : ""}
+        ${noticeHtml(t.notice, { detailHref: `tool.html?id=${encodeURIComponent(t.id)}` })}
         <div class="card-actions">
           <a class="btn btn-primary" href="${esc(t.downloadUrl)}">⬇ 下载</a>
           <a class="btn btn-outline" href="tool.html?id=${encodeURIComponent(t.id)}">查看详情</a>
@@ -166,7 +180,7 @@ function initDetailPage() {
           </div>
         </div>
       </div>
-      ${t.notice ? `<div class="notice-bar">⚠️ ${esc(t.notice)}</div>` : ""}
+      ${noticeHtml(t.notice)}
       <div class="download-area">
         <a class="btn btn-primary btn-lg" href="${esc(t.downloadUrl)}">⬇ 立即下载</a>
         <div class="file-info">
