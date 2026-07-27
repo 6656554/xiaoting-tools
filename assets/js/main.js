@@ -17,7 +17,7 @@ function esc(str) {
 function noticeHtml(notice, { detailHref = "" } = {}) {
   if (!notice || !notice.title) return "";
   if (detailHref) {
-    return `<div class="notice-bar notice-sm">⚠️ ${esc(notice.title)}，<a href="${esc(detailHref)}">查看解决办法</a></div>`;
+    return `<div class="notice-bar notice-sm">⚠️ ${esc(notice.title)}，<a href="${esc(detailHref)}">查看说明</a></div>`;
   }
   const items = (notice.items || []).map((s) => `<li>${esc(s)}</li>`).join("");
   return `<div class="notice-bar">
@@ -48,7 +48,11 @@ function renderToolCards(list) {
         <div class="tool-summary">${esc(t.summary)}</div>
         ${noticeHtml(t.notice, { detailHref: `tool.html?id=${encodeURIComponent(t.id)}` })}
         <div class="card-actions">
-          <a class="btn btn-primary" href="${esc(t.downloadUrl)}">⬇ 下载</a>
+          ${
+            t.downloadPaused
+              ? `<span class="btn btn-disabled" aria-disabled="true">⏸ 暂停下载</span>`
+              : `<a class="btn btn-primary" href="${esc(t.downloadUrl)}">⬇ 下载</a>`
+          }
           <a class="btn btn-outline" href="tool.html?id=${encodeURIComponent(t.id)}">查看详情</a>
         </div>
       </div>`
@@ -182,10 +186,18 @@ function initDetailPage() {
       </div>
       ${noticeHtml(t.notice)}
       <div class="download-area">
-        <a class="btn btn-primary btn-lg" href="${esc(t.downloadUrl)}">⬇ 立即下载</a>
+        ${
+          t.downloadPaused
+            ? `<span class="btn btn-disabled btn-lg" aria-disabled="true">⏸ 暂停下载</span>`
+            : `<a class="btn btn-primary btn-lg" href="${esc(t.downloadUrl)}">⬇ 立即下载</a>`
+        }
         <div class="file-info">
           文件大小：${esc(t.fileSize || "—")}<br>
-          遇到浏览器拦截或杀毒提示？<a href="guide.html">查看说明</a>
+          ${
+            t.downloadPaused
+              ? "下载恢复后本页会第一时间更新"
+              : `遇到浏览器拦截或杀毒提示？<a href="guide.html">查看说明</a>`
+          }
         </div>
       </div>
     </div>

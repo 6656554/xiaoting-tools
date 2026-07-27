@@ -631,6 +631,17 @@ code {
   left: 5px;
 }
 
+/* 暂停下载时的占位按钮：数据里 downloadPaused: true 才会出现 */
+.btn-disabled,
+.btn-disabled:hover {
+  background: var(--bg-gray);
+  color: var(--text-dim);
+  border: 1px solid var(--line);
+  cursor: not-allowed;
+  box-shadow: none;
+  transform: none;
+}
+
 /* 临时公告条：数据里填了 notice 才会出现（见 data/tools.js） */
 .notice-bar {
   margin-top: 24px;

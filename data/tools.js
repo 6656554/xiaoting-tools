@@ -55,6 +55,16 @@ const TOOLS = [
     sha256: "1827B48848C986D80AFCBFBB88FCF951D6EEE9A86A88ACFFD74C74F0B88234A1",
     // 固定下载入口：由积分服务器 302 跳转到最新版飞书链接，发新版无需改网站
     downloadUrl: "https://43.129.185.208/download",
+    // 暂停下载：为 true 时下载按钮变灰不可点。恢复时删掉这一行 + 下面的 notice
+    downloadPaused: true,
+    notice: {
+      title: "下载暂时关闭",
+      items: [
+        "新版本正在复核，为免你下到有问题的版本，下载入口已暂时关闭。",
+        "恢复后本页会第一时间更新，麻烦稍后再来看看。",
+        "急需下载或有其他疑问，请直接联系我。",
+      ],
+    },
     video: "assets/media/xiaoting-8k-promo.mp4",
     changelog: [
       {
