@@ -13,15 +13,17 @@ function esc(str) {
 }
 
 /** 临时公告条（数据里的 notice 字段，见 data/tools.js）。
- *  卡片上只放标题保持紧凑，详情页展开全部条目。 */
+ *  卡片上只放标题保持紧凑，详情页展开全部条目。
+ *  图标可用 notice.icon 自定义，不填默认 ⚠️。 */
 function noticeHtml(notice, { detailHref = "" } = {}) {
   if (!notice || !notice.title) return "";
+  const icon = esc(notice.icon || "⚠️");
   if (detailHref) {
-    return `<div class="notice-bar notice-sm">⚠️ ${esc(notice.title)}，<a href="${esc(detailHref)}">查看说明</a></div>`;
+    return `<div class="notice-bar notice-sm">${icon} ${esc(notice.title)}，<a href="${esc(detailHref)}">查看说明</a></div>`;
   }
   const items = (notice.items || []).map((s) => `<li>${esc(s)}</li>`).join("");
   return `<div class="notice-bar">
-      <div class="notice-title">⚠️ ${esc(notice.title)}</div>
+      <div class="notice-title">${icon} ${esc(notice.title)}</div>
       ${items ? `<ul>${items}</ul>` : ""}
     </div>`;
 }
