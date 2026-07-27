@@ -32,6 +32,7 @@ function renderToolCards(list) {
           </div>
         </div>
         <div class="tool-summary">${esc(t.summary)}</div>
+        ${t.notice ? `<div class="notice-bar notice-sm">⚠️ ${esc(t.notice)}</div>` : ""}
         <div class="card-actions">
           <a class="btn btn-primary" href="${esc(t.downloadUrl)}">⬇ 下载</a>
           <a class="btn btn-outline" href="tool.html?id=${encodeURIComponent(t.id)}">查看详情</a>
@@ -165,6 +166,7 @@ function initDetailPage() {
           </div>
         </div>
       </div>
+      ${t.notice ? `<div class="notice-bar">⚠️ ${esc(t.notice)}</div>` : ""}
       <div class="download-area">
         <a class="btn btn-primary btn-lg" href="${esc(t.downloadUrl)}">⬇ 立即下载</a>
         <div class="file-info">
