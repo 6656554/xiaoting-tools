@@ -507,7 +507,7 @@ code {
 
 /* ---------- 详情页 ---------- */
 .detail-wrap {
-  margin: 46px 0 90px;
+  margin: 46px auto 90px;
 }
 
 .breadcrumb {
