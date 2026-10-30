@@ -12,6 +12,15 @@ function esc(str) {
   return div.innerHTML;
 }
 
+/** 工具图标：数据里填图片路径就渲染图片，填 emoji 就直接显示 */
+function iconHtml(icon) {
+  const v = icon || "🧩";
+  if (/\.(png|jpe?g|svg|webp|gif)$/i.test(v)) {
+    return `<div class="tool-icon is-img"><img src="${esc(v)}" alt=""></div>`;
+  }
+  return `<div class="tool-icon">${esc(v)}</div>`;
+}
+
 /** 临时公告条（数据里的 notice 字段，见 data/tools.js）。
  *  卡片上只放标题保持紧凑，详情页展开全部条目。
  *  图标可用 notice.icon 自定义，不填默认 ⚠️。 */
@@ -41,7 +50,7 @@ function renderToolCards(list) {
       (t, i) => `
       <div class="tool-card" style="animation-delay:${i * 70}ms">
         <div class="card-head">
-          <div class="tool-icon">${esc(t.icon || "🧩")}</div>
+          ${iconHtml(t.icon)}
           <div>
             <h3>${esc(t.name)}</h3>
             <div class="tool-meta">v${esc(t.version)} · ${esc(t.updated)} · ${esc(t.category)}</div>
@@ -175,7 +184,7 @@ function initDetailPage() {
 
     <div class="detail-card">
       <div class="detail-head">
-        <div class="tool-icon">${esc(t.icon || "🧩")}</div>
+        ${iconHtml(t.icon)}
         <div class="head-info">
           <h1>${esc(t.name)}</h1>
           <div class="tool-meta">最近更新：${esc(t.updated)}</div>

@@ -33,7 +33,7 @@ const TOOLS = [
     version: "1.6.3",
     updated: "2026-10-29",
     category: "CDR 插件",
-    icon: "🎨",
+    icon: "assets/img/xiaoting-icon.png",
     summary:
       "AI 图像工具箱：海报文字编辑、文化墙 / 画册 / 折页设计、逆天矢量生图、云端超清放大至 16K、证件照精修美颜、精准编辑、PDF 转曲、批量处理，内置「小婷智慧空间」一句话指挥全部工具。可与 CorelDRAW 深度联动，不装 CDR 也能独立使用，专为平面设计 / 广告快印行业打造。",
     description:
